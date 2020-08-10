@@ -1,0 +1,62 @@
+
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<style type="text/css">
+    label {
+    
+        display: inline-block;
+        width: 200px;
+        margin: 5px;
+        text-align: left;
+    }
+    
+    
+    button {
+        padding: 5px;
+        margin: 10px;
+    }
+    span {
+    position:fixed;
+    	display: inline-block;
+        width: 300px;
+        margin: 5px;
+        text-align: left;
+    	color: red;
+    	font-style: italic;
+}
+
+</style>
+<meta charset="ISO-8859-1">
+<title>User Registration</title>
+</head>
+<body>
+<div align="center">
+    <h1>User Registration</h1>
+    <form action="#" th:action="@{/submitUser}" method="post" th:object="${user}">
+        
+        <label class="lable">User name:</label><input type="text" th:field="*{userName}" />
+        <span class="error" th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}"></span><br/>
+ 		
+ 		<label class="lable">Short name:</label><input type="text" th:field="*{shortname}" />
+        <span class="error" th:if="${#fields.hasErrors('shortname')}" th:errors="*{shortname}"></span><br/>
+        
+        <label class="lable">Email:</label><input type="text" th:field="*{email}" />
+        <span class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span><br/>
+        
+        <label class="lable">Role Category:</label><input type="text" th:field="*{roleCategory}" />
+        <span class="error" th:if="${#fields.hasErrors('roleCategory')}" th:errors="*{roleCategory}"></span><br/>
+        
+        <label class="lable">Application Name:</label><input type="text" th:field="*{applicationName}" />
+        <span class="error" th:if="${#fields.hasErrors('applicationName')}" th:errors="*{applicationName}"></span><br/>
+        
+        <label class="lable">Assignment Group:</label><input type="text" th:field="*{assignmentGroup}" />
+        <span class="error" th:if="${#fields.hasErrors('assignmentGroup')}" th:errors="*{assignmentGroup}"></span><br/>
+		
+ 		<p><input type="submit" value="Register" /> <input type="reset" value="Reset" /></p>
+    
+    </form>
+</div>
+</body>
+</html>
