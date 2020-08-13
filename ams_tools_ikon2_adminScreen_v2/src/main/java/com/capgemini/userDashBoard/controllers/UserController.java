@@ -1,6 +1,7 @@
 package com.capgemini.userDashBoard.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.hibernate.annotations.common.util.impl.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +11,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.capgemini.userDashBoard.entities.MyUser;
+import com.capgemini.userDashBoard.repository.UserJpaRepository;
 import com.capgemini.userDashBoard.service.UserService;
 
 
@@ -24,7 +29,16 @@ public class UserController {
 	@Autowired
 	UserService userService;
 	
+	@Autowired
+	UserJpaRepository userRepo;
+	
 	org.jboss.logging.Logger logger=LoggerFactory.logger(getClass());
+	
+	@GetMapping("/users")
+	@ResponseBody
+	public List<MyUser> getAllUsers(){
+		return userRepo.findAll();
+	}
 	
 	@GetMapping("/userRegistration")
 	public String userRegistration(Model model) {
@@ -44,5 +58,18 @@ public class UserController {
 			model.addAttribute("user", myuser);
 			return "result";
 		}
+	}
+	
+	@GetMapping("/deleteUser/{id}")
+	@ResponseBody
+	public void deleteUser(@PathVariable Long id) {
+	 userService.deleteById(id);
+	 System.out.println("Deleted successfully!!");
+	}
+	
+	@GetMapping("/findById/{id}")
+	@ResponseBody
+	public Optional<MyUser> findById(@PathVariable Long id) {
+		return userService.findById(id);
 	}
 }

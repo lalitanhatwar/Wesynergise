@@ -44,5 +44,28 @@ public class MyUser {
 	@NotEmpty(message = "{assignmentGroup.notempty}")
 	private String assignmentGroup;
 	
+	public MyUser() {
+		
+	}
+
+	public MyUser(Long userId, 
+			 String userName,
+			 String shortname,
+			 String email,
+			 String roleCategory,
+			 String applicationName,
+			 String assignmentGroup) {
+		super();
+		this.userId = userId;
+		this.userName = userName;
+		this.shortname = shortname;
+		this.email = email;
+		this.roleCategory = roleCategory;
+		this.applicationName = applicationName;
+		this.assignmentGroup = assignmentGroup;
+	}
+	
+	
+	
 	
 }
